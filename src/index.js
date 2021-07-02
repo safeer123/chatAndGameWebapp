@@ -10,7 +10,7 @@ const RootPage = () => {
     nickname: "XYZ"
   };
 
-  if (!user) {
+  if (user) {
     return <App />;
   } else {
     return <Intro />;
