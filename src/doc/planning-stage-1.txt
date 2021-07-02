@@ -1,0 +1,38 @@
+refactor the client code
+ - *** WSTest --> ChatModule folder and files
+ - *** Refactor all files - add comments
+ - *** styles.css - add classes with chat- and game- tails
+ - *** split styles.css into two for chat and global
+ - *** Add app configuration
+ - *** add dev_mode to change the ws urls
+ - push the code to github
+ - get rid of styles.css
+
+name of the participant
+  - localStorage should store name and nickname of the User
+  - If they are not present - get it added first
+  - use nickname in the chat url query string
+  - backend should keep it with ws object and send back along with messages
+  - Show names on the chat window
+
+refactor and publish node server
+  - refactor the code
+  - *** push the code to github
+  - *** publish
+
+styling chat window
+  - *** header color should reflect connection status
+  - *** header should show participants count 
+  - *** Messages are to be styles as papers - from, time and message
+  - My message on right side and other messages on left side
+  - *** style input field - remove focus border
+  - style send button - use mat ui button
+
+Grouping
+  - User can create a group - Create group button - generates a 6/8 digit id
+  - User can join a group - use the id to join
+  - Admin has to allow the member in
+  - User can edit name of the group
+  - Home page shows all groups and Create a new group button
+  - Max groups 20, max participants 30
+  - How to remove a group - based on inactivity ?
