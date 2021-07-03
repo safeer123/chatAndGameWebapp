@@ -7,7 +7,7 @@ import "./styles.css";
 
 export default ({ user }) => {
   const [msgList, setMsgList] = React.useState([]);
-  const [testMsg, setTestMsg] = React.useState("");
+  const [textMsg, setTextMsg] = React.useState("");
 
   // This is a callback for incoming chat messges
   const onMessage = React.useCallback(
@@ -21,7 +21,7 @@ export default ({ user }) => {
 
   // text field input change
   const onChangeMsg = (e) => {
-    setTestMsg(e.target.value);
+    setTextMsg(e.target.value);
   };
 
   const { open, sendMessage, session, lastHB } = useWS({ onMessage, user });
@@ -65,14 +65,16 @@ export default ({ user }) => {
       <div className="chat-window-footer">
         <input
           type="text"
-          value={testMsg}
+          value={textMsg}
           onChange={onChangeMsg}
           className={"input-field-01 chat-input-field"}
         />
         <button
           onClick={() => {
-            sendMessage(testMsg);
-            setTestMsg("");
+            if(textMsg && textMsg.trim()){
+              sendMessage(textMsg);
+              setTextMsg(""); 
+            }
           }}
           className={"chat-send-button"}
         >

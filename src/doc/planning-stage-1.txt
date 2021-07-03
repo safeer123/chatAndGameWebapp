@@ -10,16 +10,16 @@ refactor the client code
  - get rid of styles.css
 
 Fix
-  - Empty messages are sent if user hits send button
-  - Once user name/nickname entered user is stuck at blank screen
+  - *** Empty messages are sent if user hits send button
+  - *** Once user name/nickname entered user is stuck at blank screen
   - There is no way to clear messages
 
 name of the participant
-  - localStorage should store name and nickname of the User
-  - If they are not present - get it added first
-  - use nickname in the chat url query string
-  - backend should keep it with ws object and send back along with messages
-  - Show names on the chat window
+  - *** localStorage should store name and nickname of the User
+  - *** If they are not present - get it added first
+  - *** use name/nickname in the chat url query string
+  - *** backend should keep it with ws object and send back along with messages
+  - *** Show names on the chat window
 
 refactor and publish node server
   - refactor the code
@@ -30,7 +30,7 @@ styling chat window
   - *** header color should reflect connection status
   - *** header should show participants count 
   - *** Messages are to be styles as papers - from, time and message
-  - My message on right side and other messages on left side
+  - *** My message on right side and other messages on left side
   - *** style input field - remove focus border
   - style send button - use mat ui button
 
