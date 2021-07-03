@@ -1,4 +1,4 @@
-const dev_mode = true;
+const dev_mode = false;
 
 const dev_config = {
   WS_CHAT_URL: "wss://wv0i8.sse.codesandbox.io/chat"

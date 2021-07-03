@@ -13,6 +13,8 @@ Fix
   - *** Empty messages are sent if user hits send button
   - *** Once user name/nickname entered user is stuck at blank screen
   - There is no way to clear messages
+  - Participants are displayed a bit late - no loading displayed
+  - There is no way to change the user name and the nick name
 
 name of the participant
   - *** localStorage should store name and nickname of the User
