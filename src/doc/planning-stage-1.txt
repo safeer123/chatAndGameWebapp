@@ -8,6 +8,10 @@ refactor the client code
  - push the code to github
  - get rid of styles.css
 
+Fix
+  - Empty messages are sent if user hits send button
+  - There is no way to clear messages
+
 name of the participant
   - localStorage should store name and nickname of the User
   - If they are not present - get it added first

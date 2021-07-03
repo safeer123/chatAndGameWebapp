@@ -5,7 +5,7 @@ import useWS from "./useWS";
 import MessageCard from "./MessageCard";
 import "./styles.css";
 
-export default () => {
+export default ({ user }) => {
   const [msgList, setMsgList] = React.useState([]);
   const [testMsg, setTestMsg] = React.useState("");
 
@@ -24,7 +24,7 @@ export default () => {
     setTestMsg(e.target.value);
   };
 
-  const { open, sendTest, lastHB } = useWS({ onMessage });
+  const { open, sendMessage, lastHB } = useWS({ onMessage, user });
 
   // console.log("pt2 --> ", msgList);
   let status = "Connecting";
@@ -69,7 +69,7 @@ export default () => {
         />
         <button
           onClick={() => {
-            sendTest(testMsg);
+            sendMessage(testMsg);
             setTestMsg("");
           }}
           className={"chat-send-button"}

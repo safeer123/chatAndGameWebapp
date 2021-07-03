@@ -1,15 +1,20 @@
 import React from "react";
 import { get } from "lodash";
 
-import config from "../config";
+import config from "../../config";
+import useGroupInfo from "../../utils/useGroupInfo";
 
 const WS_URL = config.WS_CHAT_URL;
+const getURL = ({ name, nickname }, group) => `${WS_URL}?name=${name}&nickname=${nickname}&group=${group}`
 
-export default ({ onMessage }) => {
+export default ({ onMessage, user }) => {
   const [open, setOpen] = React.useState(false);
   const [ws, setWS] = React.useState(null);
   const [terminateConn, setTerminateConn] = React.useState(null);
   const [lastHB, setLastHB] = React.useState(null);
+  const [session, setSession] = React.useState(null);
+
+  const { group } = useGroupInfo();
 
   const onOpen = (e) => {
     console.log("---- WS OPEN ---");
@@ -32,7 +37,7 @@ export default ({ onMessage }) => {
     }, 5000);
   };
   const connect = () => {
-    const wsObj = new WebSocket(WS_URL);
+    const wsObj = new WebSocket(getURL(user, group));
     setWS(wsObj);
   };
   const disconnect = () => {
@@ -49,6 +54,15 @@ export default ({ onMessage }) => {
     setTerminateConn(terminateConnRef);
   };
 
+  const onAccepted = (msgObj) => {
+    const userId = get(msgObj, "body.userId");
+    const sessionStartedAt = get(msgObj, "body.t");
+    setSession({
+      userId,
+      sessionStartedAt,
+    });
+  }
+
   React.useEffect(() => {
     if (ws) {
       console.log("new WS");
@@ -60,6 +74,9 @@ export default ({ onMessage }) => {
         if (type === "HEARTBEAT") {
           setLastHB(msgObj);
           return onHeartbeat();
+        } else if (type === "ACCEPTED") {
+          onAccepted(msgObj);
+          return;
         }
         onMessage(msgObj);
       };
@@ -76,13 +93,14 @@ export default ({ onMessage }) => {
     };
   }, []);
 
-  const sendTest = (msg) => {
-    if (open && ws) {
+  const sendMessage = (msg) => {
+    if (open && ws && session) {
       // console.log("sending test message..");
       ws.send(
         JSON.stringify({
           type: "CHAT",
           body: {
+            userId: session.userId,
             msg
           }
         })
@@ -94,6 +112,6 @@ export default ({ onMessage }) => {
     ws,
     open,
     lastHB,
-    sendTest
+    sendMessage,
   };
 };

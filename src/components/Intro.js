@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
+import USER from "../utils/userIO";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -20,16 +22,36 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 8
   }
 }));
-export default () => {
+export default ({ updateStatus }) => {
   const [name, setName] = React.useState("");
   const [nickname, setNickname] = React.useState("");
   const classes = useStyles();
+
+  React.useEffect(() => {
+    const user = USER.get();
+    updateStatus({ userProfileReady: Boolean(user), user });
+    if(user) {
+      setName(user.name || '');
+      setNickname(user.nickname || '');
+    }
+  }, []);
+
   const onChangeName = (e) => {
     setName(e.target.value);
   };
   const onChangeNickname = (e) => {
     setNickname(e.target.value);
   };
+  const validInputs = Boolean(name.trim() && nickname.trim());
+  const onDone = () => {
+    if(validInputs) {
+      USER.set(name, nickname);
+      setTimeout(()=> {
+        updateStatus({ userProfileReady: true, user });
+      }, 0);
+    }
+  }
+
   return (
     <div className={classes.root}>
       <div>
@@ -53,6 +75,8 @@ export default () => {
             color="primary"
             size="small"
             className={classes.btnRoot}
+            disabled={!validInputs}
+            onClick={onDone}
           >
             Done
           </Button>
