@@ -15,13 +15,16 @@ const [userProfileReady, setUserProfileReady] = React.useState(false);
 const [user, setUser] = React.useState(null);
 
   const updateStatus = (statusObj) => {
-    if('userProfileReady', statusObj) {
-      setUserProfileReady(statusObj.userProfileReady);
-    }
-    if('user', statusObj) {
+    if('user' in statusObj) {
+      // console.log('statusObj: ', statusObj);
       setUser(statusObj.user);
     }
+    if('userProfileReady' in statusObj) {
+      setUserProfileReady(statusObj.userProfileReady);
+    }
   }
+
+  // console.log(userProfileReady);
 
   if (userProfileReady) {
     return <App updateStatus={updateStatus} user={user}/>;

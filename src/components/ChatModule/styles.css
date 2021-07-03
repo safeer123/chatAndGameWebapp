@@ -12,6 +12,7 @@
   flex-direction: column-reverse;
   align-items: flex-start;
   border-bottom: 1px solid #b1b1b1;
+  background-color: #f4f7f0;
 }
 
 .chat-window-header {

@@ -11,6 +11,7 @@ refactor the client code
 
 Fix
   - Empty messages are sent if user hits send button
+  - Once user name/nickname entered user is stuck at blank screen
   - There is no way to clear messages
 
 name of the participant

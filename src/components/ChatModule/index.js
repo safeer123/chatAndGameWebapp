@@ -24,7 +24,7 @@ export default ({ user }) => {
     setTestMsg(e.target.value);
   };
 
-  const { open, sendMessage, lastHB } = useWS({ onMessage, user });
+  const { open, sendMessage, session, lastHB } = useWS({ onMessage, user });
 
   // console.log("pt2 --> ", msgList);
   let status = "Connecting";
@@ -55,8 +55,10 @@ export default ({ user }) => {
           const from = get(m, "body.from");
           const msg = get(m, "body.msg");
           const t = get(m, "body.t");
+          const senderId = get(m, "body.userId");
+          const isMine = senderId === get(session, "userId");
           return (
-            <MessageCard key={`${from}_${t}`} from={from} msg={msg} time={t} />
+            <MessageCard key={`${from}_${t}`} from={from} msg={msg} time={t} isMine={isMine}/>
           );
         })}
       </div>

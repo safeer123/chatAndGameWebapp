@@ -14,6 +14,8 @@ export default ({ onMessage, user }) => {
   const [lastHB, setLastHB] = React.useState(null);
   const [session, setSession] = React.useState(null);
 
+  // console.log('useWS user: ', user);
+
   const { group } = useGroupInfo();
 
   const onOpen = (e) => {
@@ -37,8 +39,10 @@ export default ({ onMessage, user }) => {
     }, 5000);
   };
   const connect = () => {
-    const wsObj = new WebSocket(getURL(user, group));
-    setWS(wsObj);
+    if(user, group) {
+      const wsObj = new WebSocket(getURL(user, group));
+      setWS(wsObj);
+    }
   };
   const disconnect = () => {
     if (ws) {
@@ -112,6 +116,7 @@ export default ({ onMessage, user }) => {
     ws,
     open,
     lastHB,
+    session,
     sendMessage,
   };
 };

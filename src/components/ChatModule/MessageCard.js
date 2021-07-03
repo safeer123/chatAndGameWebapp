@@ -8,7 +8,11 @@ const useStyles = makeStyles((theme) => ({
     margin: 8,
     padding: "8px 8px",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+  },
+  ownMsg: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#ebebff',
   },
   header: {
     fontSize: 12,
@@ -26,10 +30,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default ({ from, msg, time }) => {
+export default ({ from, msg, time, isMine }) => {
   const classes = useStyles();
+  let rootClass = `${classes.root}`;
+  if(isMine) {
+    rootClass = `${classes.root} ${classes.ownMsg}`;
+  }
   return (
-    <Paper className={classes.root}>
+    <Paper className={rootClass}>
       <div className={classes.header}>{from}</div>
       <div className={classes.msgBody}>{msg}</div>
       <div className={classes.footer}>
