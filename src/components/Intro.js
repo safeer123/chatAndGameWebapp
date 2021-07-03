@@ -47,6 +47,7 @@ export default ({ updateStatus }) => {
     if(validInputs) {
       USER.set(name, nickname);
       setTimeout(()=> {
+        const user = USER.get();
         updateStatus({ userProfileReady: true, user });
       }, 0);
     }
