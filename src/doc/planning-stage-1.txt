@@ -5,7 +5,8 @@ refactor the client code
  - *** split styles.css into two for chat and global
  - *** Add app configuration
  - *** add dev_mode to change the ws urls
- - push the code to github
+ - *** push the code to github
+ - *** publish
  - get rid of styles.css
 
 name of the participant
