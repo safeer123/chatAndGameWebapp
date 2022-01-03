@@ -9,9 +9,10 @@ function useQuery() {
 
 export default () => {
   const query = useQuery();
+  const groupId = query.get("group");
 
   return {
-    valid: true,
-    group: query.get("group"),
+    valid: Boolean(groupId),
+    group: groupId,
   };
 };

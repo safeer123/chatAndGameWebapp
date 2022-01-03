@@ -39,7 +39,7 @@ export default ({ onMessage, user }) => {
     }, 5000);
   };
   const connect = () => {
-    if(user, group) {
+    if(user && group) {
       const wsObj = new WebSocket(getURL(user, group));
       setWS(wsObj);
     }

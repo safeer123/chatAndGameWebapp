@@ -26,6 +26,13 @@ export default ({ user }) => {
 
   const { open, sendMessage, session, lastHB } = useWS({ onMessage, user });
 
+  const sendChat = () => {
+    if(textMsg && textMsg.trim()){
+      sendMessage(textMsg);
+      setTextMsg(""); 
+    }
+  }
+
   // console.log("pt2 --> ", msgList);
   let status = "Connecting";
   const connCount = get(lastHB, "body.total");
@@ -63,23 +70,25 @@ export default ({ user }) => {
         })}
       </div>
       <div className="chat-window-footer">
-        <input
-          type="text"
-          value={textMsg}
-          onChange={onChangeMsg}
-          className={"input-field-01 chat-input-field"}
-        />
-        <button
-          onClick={() => {
-            if(textMsg && textMsg.trim()){
-              sendMessage(textMsg);
-              setTextMsg(""); 
-            }
-          }}
-          className={"chat-send-button"}
-        >
-          Send
-        </button>
+          <input
+            type="text"
+            value={textMsg}
+            onChange={onChangeMsg}
+            className={"input-field-01 chat-input-field"}
+            onKeyPress={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault();
+                event.stopPropagation();
+                sendChat();
+              }
+            }}
+          />
+          <button
+            onClick={sendChat}
+            className={"chat-send-button"}
+          >
+            Send
+          </button>
       </div>
     </div>
   );
